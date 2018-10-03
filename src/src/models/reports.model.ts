@@ -1,11 +1,12 @@
 import * as mongoose from 'mongoose';
 import dbconnect from '../../libs/mongoose'
+
 class Reportes{
 
-    public Schema = mongoose.Schema;
-    public dbconnect = dbconnect;
+    private Schema = mongoose.Schema;
+    private DBConnect = dbconnect;
 
-    public Images = new this.Schema({
+    private Images = new this.Schema({
         kind: {
             type: String,
             enum: ['thumbnail', 'detail'],
@@ -14,7 +15,7 @@ class Reportes{
         url: { type: String, required: true }
     });
 
-    public Report = new this.Schema({
+    private Report = new this.Schema({
         title: { type: String, required: true },
         author: { type: String, required: true },
         description: { type: String, required: true },
@@ -23,7 +24,7 @@ class Reportes{
     });
 
 
-    public ReporteModel = this.dbconnect.model('Report', this.Report);
+    public ReporteModel = this.DBConnect.model('Report', this.Report);
     
 }
 export default new Reportes().ReporteModel;

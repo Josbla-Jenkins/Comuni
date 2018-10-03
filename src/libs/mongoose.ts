@@ -3,21 +3,28 @@ import log from './log';
 import config from './config'
 
 class DBConnect{
-    public dbconnect;
-    public config = config;
+    public DBConnect = mongoose;
+    private Config = config;
+    private Log = log;
 
     constructor(){
-        this.dbconnect = mongoose;
-        this.dbconnect.connect(this.config.get('mongoose:uri'));
-        let db = this.dbconnect.connection;
+
+        this.ConnectDB();
+
+    }
+
+    private ConnectDB(){
+
+        this.DBConnect.connect(this.Config.get('mongoose:uri'),{ useNewUrlParser: true });
+        let db = this.DBConnect.connection;
 
         db.on('error', (err)=>{
-            log(module).error(`Connection error: ${err}`);
+            this.Log(module).error(`Connection error: ${err}`);
         });
         db.once('open', ()=>{
-            log(module).info('Connected to DB!');
-        });
+            this.Log(module).info('Connected to DB!');
+        });    
     }
 }
 
-export default new DBConnect().dbconnect;
+export default new DBConnect().DBConnect;

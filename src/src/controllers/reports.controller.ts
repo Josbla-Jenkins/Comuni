@@ -1,16 +1,16 @@
 import * as express from 'express';
-import reportModel from './reports.model';
+import reportModel from '../models/reports.model';
 import log from '../../libs/log';
 
 class ReportController{
 
-    public reportModel = reportModel;
-    public router = express.Router();
+    public ReportModel = reportModel;
+    public Router = express.Router();
 
     constructor(){
-        this.router.get('/api/reportes', (req, res)=>{
+        this.Router.get('/api/reportes', (req, res)=>{
 
-            return this.reportModel.find((err, reports)=>{
+            return this.ReportModel.find((err, reports)=>{
                 if(!err)
                     return res.send(reports);
                 else{
@@ -21,15 +21,15 @@ class ReportController{
             });
         });
 
-        this.router.post('/api/reportes',(req, res)=>{
+        this.Router.post('/api/reportes',(req, res)=>{
 
-            let report = new this.reportModel({
+            let report = new this.ReportModel({
                 title: req.body.title,
                 author: req.body.author,
                 description: req.body.description,
                 images: req.body.images
             });
-    
+            
             report.save((err)=>{
                 if(!err){
                     log(module).info('Report created sussesfull!!');
@@ -45,8 +45,8 @@ class ReportController{
             });
         });
 
-        this.router.get('/api/reportes/:id',(req, res)=>{
-           return this.reportModel.findById(req.params.id, (err, report)=>{
+        this.Router.get('/api/reportes/:id',(req, res)=>{
+           return this.ReportModel.findById(req.params.id, (err, report)=>{
                 if(!report){
                     res.statusCode = 404;
                     return res.send({error: 'Not found'});
@@ -61,8 +61,8 @@ class ReportController{
            });
         });
 
-        this.router.delete('/api/reportes/:id', (req, res)=>{
-            return this.reportModel.findById(req.params.id, (err, report)=>{
+        this.Router.delete('/api/reportes/:id', (req, res)=>{
+            return this.ReportModel.findById(req.params.id, (err, report)=>{
                 if(!report){
                     res.statusCode = 404;
                     return res.send({error : 'Not found'});
@@ -81,9 +81,6 @@ class ReportController{
             });
         });
     }
-
-    public newReport(req, res){
-    }
 }
 
-export default new ReportController().router;
+export default new ReportController().Router;

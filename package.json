@@ -16,9 +16,16 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.16.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "mongoose": "^5.3.0",
     "nconf": "^0.10.0",
+    "oauth2orize": "^1.11.0",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-oauth2-client-password": "^0.1.2",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1",
     "winston": "^3.1.0"

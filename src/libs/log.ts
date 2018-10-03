@@ -5,13 +5,19 @@ class Logger{
     public getLogger(module){
 
         let path = module.filename.split('/').slice(-2).join('/');
+
+        let options = {
+            console:{
+                level: 'debug',
+                format: winston.format.json(),
+                colorize: true,
+                label: path
+            }
+        };
+
         return winston.createLogger({
-            level: 'debug',
-            format: winston.format.json(),
             transports:[
-                new winston.transports.Console({
-                    format: winston.format.simple()
-                })
+                new winston.transports.Console(options.console)
             ]
         });
     }
