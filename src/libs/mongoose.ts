@@ -15,7 +15,7 @@ class DBConnect{
 
     private ConnectDB(){
 
-        this.DBConnect.connect(this.Config.get('mongoose:uri'),{ useNewUrlParser: true });
+        this.DBConnect.connect(this.Config.get('mongoose:uri'),{ useCreateIndex: true, useNewUrlParser: true });
         let db = this.DBConnect.connection;
 
         db.on('error', (err)=>{
